@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>NicoNico SPEENYA</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="NicoSPEENYA">
+  <link rel="apple-touch-icon" href="logo.png">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+  <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script>
+    // prevent user scroll on mobile phone
+    document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+
+    function handleSubmit(form) {
+      var action = $(form).attr('action');
+      var params = $(form).serialize();
+      var url = action + '?' + params;
+
+      $.get(url)
+        .fail(function() {
+          alert('failed to send message.')
+        });
+    }
+
+    function like(type) {
+      var action = '/like';
+      var params = 'image=' + type;
+      var url = action + '?' + params;
+
+      $.get(url)
+        .fail(function() {
+          alert('failed to like.')
+        });
+    }
+  </script>
+  <style>
+    body {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -khtml-user-select: none;
+      -ms-user-select: none;
+    }
+    .footer {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      background-color: rgba(0,0,0,0.05);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <form class="form-horizontal" style="margin: 16px" role="form" action="/like" method="get" onsubmit="handleSubmit(this); return false;">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Like</label>
+        <div class="input-group">
+          <button class="btn btn-primary" type="button" onclick="like('thumb')">
+            <i class="fa fa-thumbs-up"></i> Like
+          </button>
+          <button class="btn btn-default" type="button" onclick="like('logo')">
+            <i class="fa fa-paw"></i> SPEENYA
+          </button>
+        </div>
+      </div>
+      <div id="url" class="form-group" style="display: none">
+        <label class="control-label col-sm-2">Send Image</label>
+        <div class="input-group">
+          <input type="text" name="url" class="form-control" placeholder="Please input image url">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="fa fa-image"></i></button>
+          </span>
+        </div>
+      </div>
+    </form>
+    <form class="form-horizontal" style="margin: 16px" role="form" action="/comment" method="get" onsubmit="if (this.body.value == '') return false; handleSubmit(this); this.body.value = ''; return false;">
+      <div class="form-group">
+        <label class="control-label col-sm-2">Comment</label>
+        <div class="input-group">
+          <input type="text" name="body" class="form-control" placeholder="Please input your comment">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit"><i class="fa fa-comment"></i></button>
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Size</label>
+        <div class="input-group btn-group" data-toggle="buttons">
+          <label class="btn btn-default">
+            <input type="radio" name="size" value="48"> Big
+          </label>
+          <label class="btn btn-default active">
+            <input type="radio" name="size" value="32" selected> Medium
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="size" value="24"> Small
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Speed</label>
+        <div class="input-group btn-group" data-toggle="buttons">
+          <label class="btn btn-default">
+            <input type="radio" name="duration" value="5000"> Slow
+          </label>
+          <label class="btn btn-default active">
+            <input type="radio" name="duration" value="3000" selected> Medium
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="duration" value="1000"> Fast
+          </label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-sm-2">Color</label>
+        <div class="input-group btn-group" data-toggle="buttons">
+          <label class="btn btn-default active">
+            <input type="radio" name="color" value="black" selected> Black
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="color" value="red"> Red
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="color" value="blue"> Blue
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="color" value="green"> Green
+          </label>
+        </div>
+      </div>
+    </form>
+    <div class="text-right" style="margin-top: 30px">
+      <button class="btn btn-default btn-sm" type="button" onclick="$('#url').show(); $(this).hide()">
+        <i class="fa fa-bolt"></i> Show Send Image Textbox
+      </button>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container text-right">
+      niconico-speenya © 2015 @chimerast
+    </div>
+  </div>
+</body>
+
+</html>
