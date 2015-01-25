@@ -3,26 +3,26 @@ var app = express();
 var http = require('http').createServer(app);
 var io = require('socket.io')(http);
 var extend = require('util')._extend;
-var morgan = require('morgan');
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
-app.use(morgan('combined'));
-
 app.get('/comment/:comment', function (req, res) {
   var msg = extend({ body: req.param('comment') }, req.query);
+  console.log('comment: ' + JSON.stringify(msg));
   io.emit('comment', msg);
   res.end();
 });
 
 app.get('/comment', function (req, res) {
   var msg = extend({}, req.query);
+  console.log('comment: ' + JSON.stringify(msg));
   io.emit('comment', msg);
   res.end();
 });
 
 app.get('/like', function (req, res) {
   var msg = extend({}, req.query);
+  console.log('like: ' + JSON.stringify(msg));
   io.emit('like', msg);
   res.end();
 });
