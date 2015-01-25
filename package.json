@@ -5,6 +5,7 @@
   "dependencies": {
     "console-stamp": "^0.1.3",
     "express": "^4.11.0",
+    "morgan": "^1.5.1",
     "socket.io": "^1.3.2"
   }
 }
