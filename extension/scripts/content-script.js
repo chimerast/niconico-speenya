@@ -1,22 +1,42 @@
-(function () {
+var speenya = (function() {
   // change to your server url
   var SERVER_URL = 'http://localhost:2525';
 
-  function initialize() {
-    if (typeof io == 'undefined' || typeof io.connect == 'undefined') {
-      setTimeout(initialize, 100);
-      return;
-    }
+  var socket = null;
 
-    var socket = io.connect(SERVER_URL);
+  function connect() {
+    if (socket) return;
+
+    socket = io.connect(SERVER_URL, {
+      'forceNew': true
+    });
     socket.on('comment', handleComment);
     socket.on('like', handleLike);
 
-    console.log('niconico speenya v0.0.1: ' + SERVER_URL);
+    console.log('niconico speenya v0.0.1: connect to ' + SERVER_URL);
+  }
+
+  function disconnect() {
+    if (!socket) return;
+
+    socket.disconnect();
+    socket = null;
+
+    console.log('niconico speenya v0.0.1: disconnect form ' + SERVER_URL);
   }
 
   function rand(value) {
     return Math.floor(value * Math.random());
+  }
+
+  function checkEnabled() {
+    return new Promise(function(resolve, reject) {
+      chrome.runtime.sendMessage({
+        message: 'checkEnabled'
+      }, function(response) {
+        resolve(response.enabled);
+      });
+    });
   }
 
   function handleComment(msg) {
@@ -50,7 +70,7 @@
     timing.iterations = 1;
     timing.easing = msg.easing || 'linear';
 
-    t.animate(effect, timing).onfinish = function () {
+    t.animate(effect, timing).onfinish = function() {
       document.body.removeChild(t);
     };
   }
@@ -61,10 +81,10 @@
 
     var t = document.createElement('img');
 
-    t.addEventListener('load', function (e) {
+    t.addEventListener('load', function(e) {
       t.style.position = 'fixed';
-      t.style.left = rand(window.innerWidth) - t.width/2 + 'px';
-      t.style.top = rand(window.innerHeight) - t.height/2 + 'px';
+      t.style.left = rand(window.innerWidth) - t.width / 2 + 'px';
+      t.style.top = rand(window.innerHeight) - t.height / 2 + 'px';
       t.style.zIndex = 2147483647;
       t.style.opacity = 0.0;
 
@@ -86,7 +106,7 @@
       timing.iterations = 1;
       timing.easing = msg.easing || 'ease';
 
-      t.animate(effect, timing).onfinish = function () {
+      t.animate(effect, timing).onfinish = function() {
         document.body.removeChild(t);
       };
     });
@@ -94,5 +114,17 @@
     t.src = url;
   }
 
-  initialize();
+  checkEnabled()
+    .then(function(enabled) {
+      if (enabled) {
+        connect();
+      } else {
+        disconnect();
+      }
+    });
+
+  return {
+    connect: connect,
+    disconnect: disconnect
+  };
 })();
