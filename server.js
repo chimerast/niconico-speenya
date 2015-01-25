@@ -6,21 +6,29 @@ var extend = require('util')._extend;
 
 require('console-stamp')(console, '[HH:MM:ss.l]');
 
-app.get('/comment/:comment', function (req, res) {
+var refererCheck = function (req, res, next) {
+  if (req.get('Referer')) {
+    next();
+  } else {
+    res.status(404).end();
+  }
+};
+
+app.get('/comment/:comment', refererCheck, function (req, res) {
   var msg = extend({ body: req.param('comment') }, req.query);
   console.log('comment: ' + JSON.stringify(msg));
   io.emit('comment', msg);
   res.end();
 });
 
-app.get('/comment', function (req, res) {
+app.get('/comment', refererCheck, function (req, res) {
   var msg = extend({}, req.query);
   console.log('comment: ' + JSON.stringify(msg));
   io.emit('comment', msg);
   res.end();
 });
 
-app.get('/like', function (req, res) {
+app.get('/like', refererCheck, function (req, res) {
   var msg = extend({}, req.query);
   console.log('like: ' + JSON.stringify(msg));
   io.emit('like', msg);
