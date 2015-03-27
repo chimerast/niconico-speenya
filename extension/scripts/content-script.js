@@ -42,7 +42,7 @@ var speenya = (function() {
   function handleComment(msg) {
     var color = msg.color || '#000000';
     var shadow = msg.shadow || '#ffffff'
-    var size = msg.size || 32;
+    var size = msg.size || 56;
 
     var t = document.createElement('div');
 
@@ -50,6 +50,7 @@ var speenya = (function() {
     t.style.left = window.innerWidth + 'px';
     t.style.top = rand(window.innerHeight - 40) + 'px';
     t.style.fontSize = size + 'pt';
+    t.style.fontWeight = 'bold';
     t.style.color = color;
     t.style.textShadow = '-2px -2px 0px ' + shadow + ', -2px 2px 0px ' + shadow + ', 2px -2px 0px ' + shadow + ', 2px 2px 0px ' + shadow;
     t.style.whiteSpace = 'pre';
@@ -66,9 +67,11 @@ var speenya = (function() {
     }];
 
     var timing = {};
-    timing.duration = msg.duration || 2000;
+    timing.duration = (msg.duration || 2000) * (window.innerWidth + t.offsetWidth) / window.innerWidth;
     timing.iterations = 1;
     timing.easing = msg.easing || 'linear';
+
+    t.style.top = rand(window.innerHeight - t.offsetHeight) + 'px';
 
     t.animate(effect, timing).onfinish = function() {
       document.body.removeChild(t);
