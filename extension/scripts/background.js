@@ -1,7 +1,8 @@
 (function () {
   var enabled = false;
 
-  chrome.storage.sync.get({enabled: true}, function (items) {
+  // get stored settings
+  chrome.storage.sync.get({ enabled: true }, function (items) {
     if (chrome.runtime.lastError) {
       console.log(chrome.runtime.lastError);
     }
@@ -9,8 +10,9 @@
     update();
   })
 
-  function executeScript(script) {
-    chrome.tabs.query({windowType: 'normal'}, function(tabs) {
+  // execute script in all tabs
+  function executeScriptInAllTabs(script) {
+    chrome.tabs.query({ windowType: 'normal' }, function(tabs) {
       for (tab of tabs) {
         if (tab.url.indexOf("chrome://") != 0) {
           chrome.tabs.executeScript(tab.id, { code: script });
@@ -19,6 +21,7 @@
     });
   }
 
+  // update status and store settings
   function update() {
     if (enabled) {
       var details = {
@@ -28,9 +31,9 @@
         }
       };
 
-      chrome.storage.sync.set({enabled: true});
+      chrome.storage.sync.set({ enabled: true });
       chrome.browserAction.setIcon(details);
-      executeScript('if (typeof speenya !== "undefined") speenya.connect();');
+      executeScriptInAllTabs('if (typeof speenya !== "undefined") speenya.connect();');
     } else {
       var details = {
         path: {
@@ -39,9 +42,9 @@
         }
       };
 
-      chrome.storage.sync.set({enabled: false});
+      chrome.storage.sync.set({ enabled: false });
       chrome.browserAction.setIcon(details);
-      executeScript('if (typeof speenya !== "undefined") speenya.disconnect();');
+      executeScriptInAllTabs('if (typeof speenya !== "undefined") speenya.disconnect();');
     }
   }
 
