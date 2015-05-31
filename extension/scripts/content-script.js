@@ -1,6 +1,8 @@
 var speenya = (function() {
   // change to your server url
   var SERVER_URL = 'http://localhost:2525';
+  var APP_ID = chrome.runtime.id;
+  var APP_VERSION = chrome.runtime.getManifest().version;
 
   var socket = null;
 
@@ -13,7 +15,7 @@ var speenya = (function() {
     socket.on('comment', handleComment);
     socket.on('like', handleLike);
 
-    console.log('niconico speenya v0.0.1: connect to ' + SERVER_URL);
+    console.log('niconico speenya v' + APP_VERSION + ': connect to ' + SERVER_URL);
   }
 
   function disconnect() {
@@ -22,7 +24,7 @@ var speenya = (function() {
     socket.disconnect();
     socket = null;
 
-    console.log('niconico speenya v0.0.1: disconnect form ' + SERVER_URL);
+    console.log('niconico speenya v' + APP_VERSION + ': disconnect form ' + SERVER_URL);
   }
 
   function rand(value) {
@@ -80,7 +82,7 @@ var speenya = (function() {
 
   function handleLike(msg) {
     var image = msg.image || 'thumb';
-    var url = msg.url || 'chrome-extension://eopheappniebiogjpdkkehplbpdfalkl/images/' + image + '.png';
+    var url = msg.url || 'chrome-extension://' + APP_ID + '/images/' + image + '.png';
 
     var t = document.createElement('img');
 

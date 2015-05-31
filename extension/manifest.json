@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "NicoNico SPEENYA",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "niconico method for Chrome",
 
   "icons": {
@@ -28,7 +28,6 @@
     }
   ],
   "web_accessible_resources": [
-    "scripts/*.js",
     "images/*"
   ],
   "permissions": [
