@@ -1,4 +1,8 @@
-## NicoNico SPEENYA
+NicoNico SPEENYA
+====
+
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+
 
 ブラウザに、ニコニコ動画のように右から左に流れるコメントを表示する、Chrome機能拡張とサーバプログラムです。Likeボタンを押すといいね画像が浮き上がったりします。
 
