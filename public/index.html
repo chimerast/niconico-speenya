@@ -17,33 +17,31 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
   <script>
     // prevent user scroll on mobile phone
-    document.addEventListener('touchmove', function(e) { e.preventDefault(); }, false);
+    document.addEventListener('touchmove', function (e) { e.preventDefault() }, false)
 
-    function handleSubmit(form) {
-      var action = $(form).attr('action');
-      var params = $(form).serialize();
-      var url = action + '?' + params;
+    function handleSubmit (form) {
+      const action = $(form).attr('action')
+      const params = $(form).serialize()
+      const url = `${action}?${params}`
 
       $.get(url)
-        .fail(function() {
+        .fail(function () {
           alert('failed to send message.')
         });
     }
 
-    function like(type) {
-      var action = '/like';
-      var params = 'image=' + type;
-      var url = action + '?' + params;
+    function like (type) {
+      const url = `/like?image=${type}`
 
       $.get(url)
-        .fail(function() {
+        .fail(function () {
           alert('failed to like.')
-        });
+        })
     }
 
-    $(function() {
-      FastClick.attach(document.body);
-    });
+    $(function () {
+      FastClick.attach(document.body)
+    })
   </script>
   <style>
     body {
@@ -152,7 +150,7 @@
   </div>
   <div class="footer">
     <div class="container text-right">
-      niconico-speenya © 2015 @chimerast
+      niconico-speenya © 2015-2017 @chimerast
     </div>
   </div>
 </body>
