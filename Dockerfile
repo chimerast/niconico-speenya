@@ -1,10 +1,10 @@
-FROM mhart/alpine-node
+FROM node:6-alpine
 
 WORKDIR /nico
 
 ADD . .
 
-RUN npm install
+RUN yarn install
 
 ENV PORT 80
 
