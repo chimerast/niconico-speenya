@@ -6,8 +6,8 @@ ADD . .
 
 RUN npm install
 
-ENV PORT 8080
+ENV PORT 80
 
-EXPOSE 8080
+EXPOSE 80
 
 CMD npm start
