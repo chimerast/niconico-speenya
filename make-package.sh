@@ -4,6 +4,8 @@ mkdir -p dist
 
 cd extension
 
-rm ../dist/extension.zip
+if [ -f "../dist/extension.zip" ]; then
+  rm ../dist/extension.zip
+fi
 
 zip -r ../dist/extension.zip *
