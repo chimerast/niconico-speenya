@@ -6,6 +6,10 @@ body {
   -ms-user-select: none;
 }
 
+body.blueback {
+  background-color: blue;
+}
+
 h5 {
   font-weight: bold;
 }
