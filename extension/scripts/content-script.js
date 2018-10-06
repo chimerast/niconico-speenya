@@ -43,7 +43,7 @@
   function handleComment (msg) {
     const color = msg.color || '#000000'
     const shadow = msg.shadow || '#ffffff'
-    const size = msg.size || 56
+    const size = msg.size || 92
 
     const t = document.createElement('div')
 
