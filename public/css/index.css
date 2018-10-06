@@ -1,0 +1,82 @@
+@charset "UTF-8";
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -khtml-user-select: none;
+  -ms-user-select: none;
+}
+
+h5 {
+  font-weight: bold;
+}
+
+select, option {
+  font-family: 'FontAwesome'
+}
+
+div.size {
+  display: inherit;
+}
+
+div.speed {
+  margin-left: 9em;
+  display: inherit;
+}
+
+div.flipsnap {
+  margin-bottom: 0.5em;
+  white-space: nowrap;
+  overflow-x: scroll;
+  -webkit-overflow-scrolling: touch;
+  overflow-scrolling: touch;
+}
+
+div.flipsnap > button.send1 > img, div.flipsnap > button.send2 > img {
+  width: 60px;
+}
+
+div.screen {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 10;
+  color: gray;
+  text-align: center;
+}
+
+div.screen.cyan {
+  background-color: cyan;
+}
+
+div.screen.yellow {
+  background-color: yellow;
+}
+
+div.screen.magenta {
+  background-color: magenta;
+}
+
+div.screen.green {
+  background-color: lime;
+}
+
+@-webkit-keyframes bg-color {
+  0% { background-color: cyan; }
+  25% { background-color: lime; }
+  50% { background-color: yellow; }
+  75% { background-color: magenta; }
+  100% { background-color: cyan; }
+}
+
+@keyframes bg-color {
+  0% { background-color: cyan; }
+  25% { background-color: lime; }
+  50% { background-color: yellow; }
+  75% { background-color: magenta; }
+  100% { background-color: cyan; }
+}
+
+div.screen.random {
+  animation: bg-color 5s infinite;
+  -webkit-animation: bg-color 5s infinite;
+}
