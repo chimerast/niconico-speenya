@@ -1,158 +1,145 @@
+
 <!DOCTYPE html>
 <html>
 
 <head>
   <meta charset="UTF-8">
-  <title>NicoNico SPEENYA</title>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="NicoSPEENYA">
+  <meta name="apple-mobile-web-app-title" content="25ment">
   <link rel="apple-touch-icon" href="logo.png">
-  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <script src="//code.jquery.com/jquery-2.1.3.min.js"></script>
-  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
-  <script>
-    // prevent user scroll on mobile phone
-    document.addEventListener('touchmove', function (e) { e.preventDefault() }, false)
-
-    function handleSubmit (form) {
-      const action = $(form).attr('action')
-      const params = $(form).serialize()
-      const url = `${action}?${params}`
-
-      $.get(url)
-        .fail(function () {
-          alert('failed to send message.')
-        });
-    }
-
-    function like (type) {
-      const url = `/like?image=${type}`
-
-      $.get(url)
-        .fail(function () {
-          alert('failed to like.')
-        })
-    }
-
-    $(function () {
-      FastClick.attach(document.body)
-    })
-  </script>
-  <style>
-    body {
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -khtml-user-select: none;
-      -ms-user-select: none;
-    }
-    .footer {
-      position: absolute;
-      bottom: 0;
-      width: 100%;
-      background-color: rgba(0,0,0,0.05);
-    }
-  </style>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+  <link rel="stylesheet" href="css/index.css">
+  <title>25ment - FGMF</title>
 </head>
 
 <body>
-  <div class="container">
-    <form class="form-horizontal" style="margin: 16px" role="form" action="/like" method="get" onsubmit="handleSubmit(this); return false;">
-      <div class="form-group">
-        <label class="control-label col-sm-2">Like</label>
-        <div class="input-group">
-          <button class="btn btn-primary" type="button" onclick="like('thumb')">
-            <i class="fa fa-thumbs-up"></i> Like
-          </button>
-          <button class="btn btn-default" type="button" onclick="like('speenya')">
-            <i class="fa fa-paw"></i> SPEENYA
-          </button>
-          <button class="btn btn-default" type="button" onclick="like('newspicks')">
-            <i class="fa fa-newspaper-o"></i> NewsPicks
-          </button>
-        </div>
+  <main class="container">
+    <h5>スタンプ<a href="index-ios.html" class="pull-right">iOSの方はコチラ</a></h5>
+    <div class="form-group">
+      <div class="flipsnap">
+        <button class="send1 btn btn-default" data-type="00_fgmf"><img src="img/00_fgmf.png"></button>
+        <button class="send1 btn btn-default" data-type="01-1_retroge_1st"><img src="img/01-1_retroge_1st.png"></button>
+        <button class="send1 btn btn-default" data-type="01-2_retroge_2nd"><img src="img/01-2_retroge_2nd.png"></button>
+        <button class="send1 btn btn-default" data-type="02_like"><img src="img/02_like.png"></button>
+        <button class="send1 btn btn-default" data-type="03_bravo"><img src="img/03_bravo.png"></button>
+        <button class="send1 btn btn-default" data-type="04_suteki"><img src="img/04_suteki.png"></button>
+        <button class="send1 btn btn-default" data-type="05_tears"><img src="img/05_tears.png"></button>
+        <button class="send1 btn btn-default" data-type="06_first"><img src="img/06_first.png"></button>
+        <button class="send1 btn btn-default" data-type="07_hot"><img src="img/07_hot.png"></button>
+        <button class="send1 btn btn-default" data-type="08_thankyou"><img src="img/08_thankyou.png"></button>
+        <button class="send1 btn btn-default" data-type="09_clap"><img src="img/09_clap.png"></button>
+        <button class="send1 btn btn-default" data-type="10_heart"><img src="img/10_heart.png"></button>
+        <button class="send1 btn btn-default" data-type="11_chikuwa"><img src="img/11_chikuwa.png"></button>
+        <button class="send1 btn btn-default" data-type="12_chikuwa_iron"><img src="img/12_chikuwa_iron.png"></button>
+        <button class="send1 btn btn-default" data-type="13_iron"><img src="img/13_iron.png"></button>
+        <button class="send1 btn btn-default" data-type="16_suito"><img src="img/16_suito.png"></button>
+        <button class="send1 btn btn-default" data-type="17_tamaran"><img src="img/17_tamaran.png"></button>
+        <button class="send1 btn btn-default" data-type="18_yoka"><img src="img/18_yoka.png"></button>
+        <button class="send1 btn btn-default" data-type="19_yokadesuka"><img src="img/19_yokadesuka.png"></button>
+        <button class="send1 btn btn-default" data-type="20_yokaroumon"><img src="img/20_yokaroumon.png"></button>
       </div>
-      <div id="url" class="form-group" style="display: none">
-        <label class="control-label col-sm-2">Send Image</label>
-        <div class="input-group">
-          <input type="text" name="url" class="form-control" placeholder="Please input image url">
-          <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><i class="fa fa-image"></i></button>
-          </span>
-        </div>
+      <div class="flipsnap">
+        <button class="send2 btn btn-default" data-type="21_kunimoto"><img src="img/21_kunimoto.png"></button>
+        <button class="send2 btn btn-default" data-type="22_kunimoto"><img src="img/22_kunimoto.png"></button>
+        <button class="send2 btn btn-default" data-type="23_tendo"><img src="img/23_tendo.png"></button>
+        <button class="send2 btn btn-default" data-type="24_tendo"><img src="img/24_tendo.png"></button>
+        <button class="send2 btn btn-default" data-type="25_teppei"><img src="img/25_teppei.png"></button>
+        <button class="send2 btn btn-default" data-type="26_teppei"><img src="img/26_teppei.png"></button>
+        <button class="send2 btn btn-default" data-type="27_matsuken"><img src="img/27_matsuken.png"></button>
+        <button class="send2 btn btn-default" data-type="28_matsuken"><img src="img/28_matsuken.png"></button>
+        <button class="send2 btn btn-default" data-type="31_itoken"><img src="img/31_itoken.png"></button>
+        <button class="send2 btn btn-default" data-type="32_itoken"><img src="img/32_itoken.png"></button>
+        <button class="send2 btn btn-default" data-type="33_kentaro"><img src="img/33_kentaro.png"></button>
+        <button class="send2 btn btn-default" data-type="34_kentaro"><img src="img/34_kentaro.png"></button>
+        <button class="send2 btn btn-default" data-type="35_kentaro"><img src="img/35_kentaro.png"></button>
+        <button class="send2 btn btn-default" data-type="36_nes_1ch"><img src="img/36_nes_1ch.png"></button>
+        <button class="send2 btn btn-default" data-type="37_nes_2ch"><img src="img/37_nes_2ch.png"></button>
+        <button class="send2 btn btn-default" data-type="38_nes_3ch"><img src="img/38_nes_3ch.png"></button>
+        <button class="send2 btn btn-default" data-type="39_nes_4ch"><img src="img/39_nes_4ch.png"></button>
+        <button class="send2 btn btn-default" data-type="40_nesband1"><img src="img/40_nesband1.png"></button>
       </div>
-    </form>
+    </div>
+
+    <h5>コメント</h5>
     <form class="form-horizontal" style="margin: 16px" role="form" action="/comment" method="get" onsubmit="if (this.body.value == '') return false; handleSubmit(this); this.body.value = ''; return false;">
       <div class="form-group">
-        <label class="control-label col-sm-2">Comment</label>
         <div class="input-group">
-          <input type="text" name="body" maxlength="60" class="form-control" placeholder="Please input your comment">
+          <input type="text" name="body" maxlength="60" class="form-control" placeholder="コメントを入力してください">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="submit"><i class="fa fa-comment"></i></button>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-comment"></i></button>
           </span>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">Size</label>
-        <div class="input-group btn-group" data-toggle="buttons">
+        <div class="input-group btn-group size" data-toggle="buttons">
           <label class="btn btn-default">
-            <input type="radio" name="size" class="needsclick" value="64"> Big
+            <input type="radio" name="size" class="needsclick" value="96"> 大
           </label>
           <label class="btn btn-default active">
-            <input type="radio" name="size" class="needsclick" value="56" selected> Medium
+            <input type="radio" name="size" class="needsclick" value="72" selected> 中
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="size" class="needsclick" value="48"> Small
+            <input type="radio" name="size" class="needsclick" value="48"> 小
+          </label>
+        </div>
+        <div class="input-group btn-group speed" data-toggle="buttons">
+          <label class="btn btn-default">
+            <input type="radio" name="duration" class="needsclick" value="4500"> 遅
+          </label>
+          <label class="btn btn-default active">
+            <input type="radio" name="duration" class="needsclick" value="3000" selected> 中
+          </label>
+          <label class="btn btn-default">
+            <input type="radio" name="duration" class="needsclick" value="1500"> 速
           </label>
         </div>
       </div>
       <div class="form-group">
-        <label class="control-label col-sm-2">Speed</label>
-        <div class="input-group btn-group" data-toggle="buttons">
-          <label class="btn btn-default">
-            <input type="radio" name="duration" class="needsclick" value="4000"> Slow
-          </label>
+        <div class="input-group btn-group color" data-toggle="buttons">
           <label class="btn btn-default active">
-            <input type="radio" name="duration" class="needsclick" value="3000" selected> Medium
+            <input type="radio" name="color" class="needsclick" value="black" selected> 黒
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="duration" class="needsclick" value="2000"> Fast
-          </label>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="control-label col-sm-2">Color</label>
-        <div class="input-group btn-group" data-toggle="buttons">
-          <label class="btn btn-default active">
-            <input type="radio" name="color" class="needsclick" value="black" selected> Black
+            <input type="radio" name="color" class="needsclick" value="red"> 赤
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="color" class="needsclick" value="red"> Red
+            <input type="radio" name="color" class="needsclick" value="yellow"> 黄
           </label>
           <label class="btn btn-default">
-            <input type="radio" name="color" class="needsclick" value="blue"> Blue
-          </label>
-          <label class="btn btn-default">
-            <input type="radio" name="color" class="needsclick" value="green"> Green
+            <input type="radio" name="color" class="needsclick" value="green"> 緑
           </label>
         </div>
       </div>
     </form>
-    <div class="text-right" style="margin-top: 30px">
-      <button class="btn btn-default btn-sm" type="button" onclick="$('#url').show(); $(this).hide()">
-        <i class="fa fa-bolt"></i> Show Send Image Textbox
-      </button>
+
+    <h5>スマリウム</h5>
+    <div class="form-group">
+      <div class="input-group btn-group smarium">
+        <button class="btn btn-default" data-color="cyan">青</button>
+        <button class="btn btn-default" data-color="yellow">黄</button>
+        <button class="btn btn-default" data-color="magenta">桃</button>
+        <button class="btn btn-default" data-color="green">緑</button>
+        <button class="btn btn-default" data-color="random">複</button>
+      </div>
     </div>
-  </div>
+
+    <p style="text-align: right;">
+      <a href="https://goo.gl/forms/PYzmc7dD1AMQ3lF02" target="_blank">アンケートにご協力くださいッ！</a>
+    </p>
+  </main>
   <div class="footer">
-    <div class="container text-right">
-      niconico-speenya © 2015-2017 @chimerast
+    <div class="container text-right" style="border-top: 1px solid #ddd;">
+      25ment ©2016-2018 <a href="https://twitter.com/fgmf_jp" target="_blank">@fgmf_jp</a>
     </div>
   </div>
+
+  <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.3/fastclick.min.js"></script>
+  <script src="js/index.js"></script>
 </body>
 
 </html>

@@ -1,7 +1,7 @@
 /* global chrome, io */
 (function () {
   // change to your server url
-  const SERVER_URL = 'http://localhost:2525'
+  const SERVER_URL = 'https://fgmf-25ment.herokuapp.com/'
   const APP_ID = chrome.runtime.id
   const APP_VERSION = chrome.runtime.getManifest().version
 
@@ -14,7 +14,7 @@
     socket.on('comment', handleComment)
     socket.on('like', handleLike)
 
-    console.log(`niconico speenya v${APP_VERSION}: connect to ${SERVER_URL}`)
+    console.log(`25ment v${APP_VERSION}: connect to ${SERVER_URL}`)
   }
 
   function disconnect () {
@@ -23,7 +23,7 @@
     socket.disconnect()
     socket = null
 
-    console.log(`niconico speenya v${APP_VERSION}: disconnect from ${SERVER_URL}`)
+    console.log(`25ment v${APP_VERSION}: disconnect from ${SERVER_URL}`)
   }
 
   function rand (value) {

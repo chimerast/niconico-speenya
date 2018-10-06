@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "NicoNico SPEENYA",
-  "version": "0.0.3",
-  "description": "The niconico method for Google Chrome",
+  "name": "25ment",
+  "version": "0.4.0",
+  "description": "Comments Scroller for Google Chrome",
 
   "icons": {
     "16": "icons/icon16.png",
@@ -15,7 +15,7 @@
       "19":"icons/icon19.png",
       "38":"icons/icon38.png"
     },
-    "default_title": "NicoNico SPEENYA"
+    "default_title": "25ment"
   },
 
   "background": {

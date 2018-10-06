@@ -1,6 +1,6 @@
 {
-  "name": "niconico-speenya",
-  "version": "0.0.3",
+  "name": "25ment",
+  "version": "0.4.0",
   "main": "server.js",
   "dependencies": {
     "console-stamp": "^0.2.5",
