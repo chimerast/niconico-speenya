@@ -106,7 +106,7 @@
       }]
 
       const timing = {}
-      timing.duration = msg.duration || 1000
+      timing.duration = msg.duration || 2000
       timing.iterations = 1
       timing.easing = msg.easing || 'ease'
 
