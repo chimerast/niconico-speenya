@@ -7,7 +7,11 @@ body {
 }
 
 body.blueback {
-  background-color: blue;
+  background-color: #0000ff;
+}
+
+body.greenback {
+  background-color: #00ff00;
 }
 
 h5 {
