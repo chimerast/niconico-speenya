@@ -6,14 +6,6 @@ body {
   -ms-user-select: none;
 }
 
-body.blueback {
-  background-color: #0000ff;
-}
-
-body.greenback {
-  background-color: #00ff00;
-}
-
 h5 {
   font-weight: bold;
 }
