@@ -4,8 +4,9 @@ function extensionIcon(enabled: boolean): chrome.browserAction.TabIconDetails {
   const postfix = enabled ? '' : '_disabled';
   return {
     path: {
-      '19': `icons/icon19${postfix}.png`,
-      '38': `icons/icon38${postfix}.png`,
+      '16': `icons/icon16${postfix}.png`,
+      '24': `icons/icon24${postfix}.png`,
+      '32': `icons/icon32${postfix}.png`,
     },
   };
 }

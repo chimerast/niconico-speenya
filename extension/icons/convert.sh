@@ -21,9 +21,11 @@ convert_icon 16
 convert_icon 48
 convert_icon 128
 
-convert_icon 19
-convert_icon 38
-convert_icon_disabled 19
-convert_icon_disabled 38
+convert_icon 16
+convert_icon 24
+convert_icon 32
+convert_icon_disabled 16
+convert_icon_disabled 24
+convert_icon_disabled 32
 
 convert_icon_chromestore

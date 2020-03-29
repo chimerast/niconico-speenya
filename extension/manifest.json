@@ -12,8 +12,9 @@
 
   "browser_action":  {
     "default_icon": {
-      "19":"icons/icon19.png",
-      "38":"icons/icon38.png"
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
     },
     "default_title": "NicoNico SPEENYA"
   },
@@ -23,7 +24,8 @@
 
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
+      "matches": ["*://*/*"],
+      "css": ["styles/content_style.css"],
       "js": ["scripts/content_script.js", "scripts/vendor.js"]
     }
   ],
@@ -31,7 +33,8 @@
     "images/*"
   ],
   "permissions": [
-    "<all_urls>",
+    "*://*/*",
+    "contextMenus",
     "tabs",
     "storage"
   ]

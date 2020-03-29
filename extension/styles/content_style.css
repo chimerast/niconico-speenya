@@ -1,0 +1,20 @@
+.niconico_speenya__comment {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  font-family: sans-serif;
+  font-weight: bold;
+  text-shadow: -2px -2px 0px #fff, -2px 2px 0px #fff, 2px -2px 0px #fff, 2px 2px 0px #fff;
+  white-space: pre;
+  z-index: 2147483647;
+  pointer-events: none;
+}
+
+.niconico_speenya__stamp {
+  position: fixed;
+  top: -9999px;
+  left: -9999px;
+  opacity: 0.0;
+  z-index: 2147483647;
+  pointer-events: none;
+}

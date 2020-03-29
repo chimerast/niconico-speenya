@@ -34,23 +34,16 @@ class SpeenyaClient {
   private handleComment(comment: CommentJson): void {
     const body = comment.body;
     const color = comment.color ?? '#000000';
-    const shadow = comment.shadow ?? '#ffffff';
-    const size = comment.size ?? 56;
+    const size = comment.size ?? 10;
     const duration = comment.duration ?? 2000;
     const easing = comment.easing ?? 'linear';
 
     const node = document.createElement('div');
 
-    node.style.position = 'fixed';
-    node.style.top = '-9999px';
-    node.style.left = '-9999px';
+    node.classList.add('niconico_speenya__comment');
+
     node.style.fontSize = size + 'vh';
-    node.style.fontWeight = 'bold';
     node.style.color = color;
-    node.style.textShadow = `-2px -2px 0px ${shadow}, -2px 2px 0px ${shadow}, 2px -2px 0px ${shadow}, 2px 2px 0px ${shadow}`;
-    node.style.whiteSpace = 'pre';
-    node.style.zIndex = '2147483647';
-    node.style.pointerEvents = 'none';
 
     node.textContent = body;
 
@@ -83,14 +76,9 @@ class SpeenyaClient {
 
     const node = document.createElement('img');
 
-    const animation = () => {
-      node.style.position = 'fixed';
-      node.style.top = '-9999px';
-      node.style.left = '-9999px';
-      node.style.zIndex = '2147483647';
-      node.style.opacity = '0.0';
-      node.style.pointerEvents = 'none';
+    node.classList.add('niconico_speenya__stamp');
 
+    const animation = () => {
       const root = this.rootElement();
       root.appendChild(node);
 

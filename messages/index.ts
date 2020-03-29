@@ -1,7 +1,6 @@
 export interface CommentJson {
   body: string;
   color?: string;
-  shadow?: string;
   size?: number;
   duration?: number;
   easing?: string;

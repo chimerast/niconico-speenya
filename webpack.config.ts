@@ -41,6 +41,10 @@ const config: Configuration = {
         from: path.resolve(__dirname, './extension/images'),
         to: path.resolve(__dirname, './dist/extension/images'),
       },
+      {
+        from: path.resolve(__dirname, './extension/styles'),
+        to: path.resolve(__dirname, './dist/extension/styles'),
+      },
     ]),
     {
       apply: (compiler) => {
