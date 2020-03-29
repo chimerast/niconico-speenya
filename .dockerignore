@@ -1,4 +1,3 @@
-.env
 data/
 dist/
 docs/
@@ -6,10 +5,21 @@ node_modules/
 LICENSE
 README.md
 
-.nuxt
-
-.git
+# Ignore version control files:
+.git/
 .gitignore
 
+# Ignore docker and environment files:
+**/*Dockerfile
+docker-compose.yml
+**/*.env
 .dockerignore
-Dockerfile
+
+# Ignore log files:
+log/*.log
+
+# Ignore OS artifacts:
+**/.DS_Store
+
+# Ignore nuxt.js files:
+.nuxt
