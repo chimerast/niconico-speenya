@@ -118,24 +118,17 @@ class SpeenyaClient {
 
     const node = document.createElement('video');
 
+    node.classList.add('niconico_speenya__webcam');
+    node.autoplay = true;
+
     this.video = node;
 
-    node.autoplay = true;
-    node.style.position = 'fixed';
-    node.style.bottom = '1vh';
-    node.style.right = '1vh';
-    node.style.width = '32vh';
-    node.style.height = '18vh';
-    node.style.zIndex = '2147483647';
+    this.rootElement().appendChild(node);
 
-    let root = this.rootElement();
-    root.appendChild(node);
-
-    document.onfullscreenchange = () => {
+    document.addEventListener('fullscreenchange', () => {
       node.remove();
-      root = this.rootElement();
-      root.appendChild(node);
-    };
+      this.rootElement().appendChild(node);
+    });
 
     navigator.mediaDevices
       .getUserMedia({
@@ -181,5 +174,11 @@ chrome.storage.onChanged.addListener((changes, namespace) => {
     } else {
       speenya.disconnect();
     }
+  }
+});
+
+chrome.runtime.onMessage.addListener((message) => {
+  if (message === 'show_webcam') {
+    speenya.showWebcam();
   }
 });

@@ -23,3 +23,13 @@ chrome.browserAction.onClicked.addListener((_tab) => {
     chrome.browserAction.setIcon(extensionIcon(toggled));
   });
 });
+
+chrome.contextMenus.create({
+  title: 'Show webcam',
+  contexts: ['browser_action'],
+  onclick: () => {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+      tabs.forEach((tab) => chrome.tabs.sendMessage(tab.id ?? 0, 'show_webcam'));
+    });
+  },
+});

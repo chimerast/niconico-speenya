@@ -18,3 +18,13 @@
   z-index: 2147483647;
   pointer-events: none;
 }
+
+.niconico_speenya__webcam {
+  position: fixed;
+  bottom: 2vh;
+  right: 2vh;
+  width: calc(24vh * 16 / 9);
+  height: 24vh;
+  z-index: 2147483647;
+  pointer-events: none;
+}
