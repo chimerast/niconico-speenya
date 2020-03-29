@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "niconico-speenya",
-  "version": "0.1.0",
+  "version": "PACKAGE_VERSION_SHOLD_BE_REPLACED",
   "description": "The niconico method presentation for Google Chrome",
 
   "icons": {

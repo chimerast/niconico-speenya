@@ -8,6 +8,12 @@ replace.sync({
   to: process.env.SERVER_URL ?? 'http://localhost:2525',
 });
 
+replace.sync({
+  files: './dist/extension/manifest.json',
+  from: /PACKAGE_VERSION_SHOLD_BE_REPLACED/g,
+  to: process.env.npm_package_version ?? '0.0.0',
+});
+
 export function extension(): Router {
   const extension = express.Router();
 
