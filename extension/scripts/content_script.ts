@@ -6,6 +6,8 @@ import { CommentJson, StampJson } from '@/messages';
 const APP_ID = chrome.runtime.id;
 const APP_VERSION = chrome.runtime.getManifest().version;
 
+const NOT_FOUND_IMAGE_URL = `chrome-extension://${APP_ID}/images/404.png`;
+
 class SpeenyaClient {
   private socket: SocketIOClient.Socket;
   private video: HTMLVideoElement | undefined;
@@ -70,7 +72,7 @@ class SpeenyaClient {
   }
 
   private handleStamp(stamp: StampJson): void {
-    const url = stamp.url ?? `chrome-extension://${APP_ID}/images/404.png`;
+    const url = stamp.url ?? NOT_FOUND_IMAGE_URL;
     const duration = stamp.duration ?? 1000;
     const easing = 'ease';
 
@@ -104,7 +106,7 @@ class SpeenyaClient {
 
     node.addEventListener('load', () => animation());
     node.addEventListener('error', () => {
-      node.src = `chrome-extension://${APP_ID}/images/404.png`;
+      node.src = NOT_FOUND_IMAGE_URL;
       animation();
     });
 
