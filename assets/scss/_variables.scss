@@ -1,0 +1,19 @@
+@import "~bulma/sass/utilities/initial-variables";
+@import "~bulma/sass/utilities/functions";
+
+// 1. Set your own initial variables and derived
+//    variables in _variables.scss
+
+$family-sans-serif: "Gill Sans", sans-serif;
+$primary: $grey-dark;
+
+// 2. Setup your Custom Colors
+@import "~bulma/sass/utilities/derived-variables";
+
+$section-padding: 1.5rem 1.5rem;
+$footer-padding: 0.5rem 1.5rem;
+
+// 3. Add new color variables to the color map.
+@import "~bulma/sass/utilities/animations";
+@import "~bulma/sass/utilities/mixins";
+@import "~bulma/sass/utilities/controls";

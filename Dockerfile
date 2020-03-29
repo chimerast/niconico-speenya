@@ -1,13 +1,23 @@
-FROM node:6-alpine
+FROM node:12-alpine
 
-WORKDIR /nico
+RUN apk add --no-cache tini bash imagemagick zip
 
-ADD . .
+WORKDIR /app
 
-RUN yarn install
+COPY package.json package-lock.json ./
+RUN npm install
 
-ENV PORT 80
+ENV HOST 0.0.0.0
+ENV PORT 8080
+ENV SERVER_URL SERVER_URL_SHOLD_BE_REPLACED
 
-EXPOSE 80
+COPY . .
+RUN npm run build
 
-CMD npm start
+EXPOSE 8080
+
+ENV NODE_ENV production
+ENV TS_NODE_PROJECT server/tsconfig.json
+
+ENTRYPOINT ["tini", "--"]
+CMD ["npx", "ts-node", "/app/server/index.ts"]

@@ -1,0 +1,13 @@
+{
+  "editor.tabSize": 2,
+  "eslint.alwaysShowStatus": true,
+  "eslint.lintTask.enable": true,
+  "eslint.validate": [ "javascript", "typescript", "vue" ],
+  "files.trimFinalNewlines": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "vetur.format.defaultFormatter.js": "none",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}

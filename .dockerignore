@@ -1,0 +1,15 @@
+.env
+data/
+dist/
+docs/
+node_modules/
+LICENSE
+README.md
+
+.nuxt
+
+.git
+.gitignore
+
+.dockerignore
+Dockerfile

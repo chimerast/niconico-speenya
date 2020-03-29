@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "NicoNico SPEENYA",
-  "version": "0.0.3",
-  "description": "The niconico method for Google Chrome",
+  "name": "niconico-speenya",
+  "version": "0.1.0",
+  "description": "The niconico method presentation for Google Chrome",
 
   "icons": {
     "16": "icons/icon16.png",
@@ -17,14 +17,14 @@
     },
     "default_title": "NicoNico SPEENYA"
   },
-
   "background": {
     "scripts": ["scripts/background.js"]
   },
+
   "content_scripts": [
     {
       "matches": ["<all_urls>"],
-      "js": ["scripts/socket.io-1.7.3.js", "scripts/content-script.js"]
+      "js": ["scripts/content_script.js", "scripts/vendor.js"]
     }
   ],
   "web_accessible_resources": [
