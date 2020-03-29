@@ -6,6 +6,7 @@ import consola from 'consola';
 import config from '../nuxt.config';
 import { api } from './api';
 import { storage } from './storage';
+import { extension } from './extension';
 import { data } from './data';
 
 config.dev = process.env.NODE_ENV !== 'production';
@@ -27,6 +28,7 @@ async function start() {
 
   app.use('/api', api(io));
   app.use('/storage', storage());
+  app.use('/extension', extension());
   app.use(nuxt.render);
 
   io.on('connection', (socket) => {
