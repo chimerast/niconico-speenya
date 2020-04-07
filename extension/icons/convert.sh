@@ -3,6 +3,10 @@
 IMAGE_FILE=$(dirname $0)/../images/logo.png
 TARGET_DIR=$1
 
+if [ -f /app/data/logo.png ]; then
+  IMAGE_FILE=/app/data/logo.png
+fi
+
 function convert_icon {
   convert $IMAGE_FILE -resize $1x$1 $TARGET_DIR/icon$1.png
 }

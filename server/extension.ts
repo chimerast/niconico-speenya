@@ -1,6 +1,9 @@
+import path from 'path';
+import { execSync } from 'child_process';
 import express, { Router } from 'express';
 import archiver from 'archiver';
 import replace from 'replace-in-file';
+import { version } from '../package.json';
 
 replace.sync({
   files: './dist/extension/scripts/content_script.js',
@@ -11,8 +14,13 @@ replace.sync({
 replace.sync({
   files: './dist/extension/manifest.json',
   from: /PACKAGE_VERSION_SHOLD_BE_REPLACED/g,
-  to: process.env.npm_package_version ?? '0.0.0',
+  to: version ?? '0.0.0',
 });
+
+const script = path.resolve(__dirname, '../extension/icons/convert.sh');
+const target = path.resolve(__dirname, '../dist/extension/icons');
+
+execSync(`${script} ${target}`);
 
 export function extension(): Router {
   const extension = express.Router();

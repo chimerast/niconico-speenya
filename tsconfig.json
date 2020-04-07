@@ -9,6 +9,7 @@
       "esnext.asynciterable",
       "dom"
     ],
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "allowJs": true,
