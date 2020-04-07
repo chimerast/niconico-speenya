@@ -52,7 +52,27 @@ class SpeenyaClient {
     const root = this.rootElement();
     root.appendChild(node);
 
-    node.style.top = this.rand(window.innerHeight - node.offsetHeight) + 'px';
+    const displaying = Array.from(document.querySelectorAll('.niconico_speenya__comment')).flatMap((element) => {
+      const node = element as HTMLElement;
+      if (node.offsetLeft + node.offsetWidth <= window.innerWidth) {
+        return [];
+      } else {
+        return [
+          {
+            top: node.offsetTop,
+            bottom: node.offsetTop + node.offsetHeight,
+          },
+        ];
+      }
+    });
+
+    let top = 0;
+    for (let i = 0; i < 10; ++i) {
+      top = this.rand(window.innerHeight - node.offsetHeight);
+      if (displaying.every((d) => top >= d.bottom || top + node.offsetHeight <= d.top)) break;
+    }
+
+    node.style.top = top + 'px';
     node.style.left = window.innerWidth + 'px';
 
     const keyframes: Keyframe[] = [
