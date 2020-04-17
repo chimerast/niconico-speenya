@@ -14,7 +14,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 import { Stamp } from '@/messages';
 
 @Component
-export default class Comment extends Vue {
+export default class StampList extends Vue {
   private stamps: Stamp[] = [];
 
   private async mounted(): Promise<void> {

@@ -1,7 +1,7 @@
 <template lang="pug">
   .container
     section.section
-      stamp
+      stamp-list
     section.section
       comment
 </template>
@@ -10,12 +10,12 @@
 import { Component, Vue } from 'nuxt-property-decorator';
 import { stampStore } from '~/store';
 import Comment from '@/components/Comment.vue';
-import Stamp from '@/components/Stamp.vue';
+import StampList from '@/components/StampList.vue';
 
 @Component({
   components: {
     Comment,
-    Stamp,
+    StampList,
   },
 })
 export default class index extends Vue {

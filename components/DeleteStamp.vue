@@ -15,7 +15,7 @@ import { Component, Vue } from 'nuxt-property-decorator';
 import { stampStore } from '~/store';
 
 @Component
-export default class Comment extends Vue {
+export default class DeleteStamp extends Vue {
   mounted() {
     stampStore.fetchStamps();
   }
