@@ -8,9 +8,14 @@
 
 <script>
 import { Component, Vue } from 'nuxt-property-decorator';
+import { stampStore } from '~/store';
 
 @Component
-export default class index extends Vue {}
+export default class index extends Vue {
+  async fetch() {
+    await stampStore.fetchStamps();
+  }
+}
 </script>
 
 <style lang="scss" scoped>

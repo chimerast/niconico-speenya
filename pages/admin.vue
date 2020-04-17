@@ -16,7 +16,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { stampStore } from '~/store';
 import UploadStamp from '@/components/UploadStamp.vue';
 import DeleteStamp from '@/components/DeleteStamp.vue';
 
@@ -26,11 +25,7 @@ import DeleteStamp from '@/components/DeleteStamp.vue';
     DeleteStamp,
   },
 })
-export default class admin extends Vue {
-  async fetch() {
-    await stampStore.fetchStamps();
-  }
-}
+export default class admin extends Vue {}
 </script>
 
 <style lang="scss" scoped></style>

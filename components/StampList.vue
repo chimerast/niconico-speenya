@@ -11,14 +11,12 @@
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { Stamp } from '@/messages';
+import { stampStore } from '~/store';
 
 @Component
 export default class StampList extends Vue {
-  private stamps: Stamp[] = [];
-
-  private async mounted(): Promise<void> {
-    this.stamps = await this.$axios.$get(`/stamps`);
+  get stamps() {
+    return stampStore.stamps;
   }
 
   private async postStamp(path: string): Promise<void> {

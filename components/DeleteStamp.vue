@@ -16,10 +16,6 @@ import { stampStore } from '~/store';
 
 @Component
 export default class DeleteStamp extends Vue {
-  mounted() {
-    stampStore.fetchStamps();
-  }
-
   get stamps() {
     return stampStore.stamps;
   }
