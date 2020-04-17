@@ -1,23 +1,24 @@
 <template lang="pug">
   .upload-stamp
     form(@submit.prevent="upload")
-      b-field(label="Label" horizontal)
-        b-field
-          b-input(v-model="label" expanded)
-          .control
-            b-button(type="is-primary" icon-left="upload" native-type="submit" :disabled="!uploadable" :class="{ 'is-loading': uploading }") Upload
-      b-field(label="Picture" horizontal)
+      b-field(label="Stamp" horizontal)
         b-upload.is-clearfix(v-model="file" :disabled="uploading" drag-drop)
           section.section
             .content.has-text-centered
               template(v-if="image === undefined")
                 p: b-icon(icon="upload" size="is-large")
                 p Drop your files here or click to upload
-              img(v-else :src="image" style="max-width: 256px; max-height: 256px;")
+              img(v-else :src="image" style="max-width: 128px; max-height: 128px;")
+      b-field(label="Label" horizontal)
+        b-input(v-model="label" expanded)
+      b-field(horizontal)
+        .control
+          b-button(type="is-primary" icon-left="upload" native-type="submit" :disabled="!uploadable" :class="{ 'is-loading': uploading }") Upload
 </template>
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'nuxt-property-decorator';
+import { stampStore } from '~/store';
 
 @Component
 export default class UploadStamp extends Vue {
@@ -28,7 +29,7 @@ export default class UploadStamp extends Vue {
   @Watch('file')
   private onFileUpdated() {
     if (this.file === null) return;
-    this.label = this.file.name;
+    this.label = ''; // this.file.name;
   }
 
   private upload(): void {
@@ -39,7 +40,7 @@ export default class UploadStamp extends Vue {
     form.set('file', this.file);
 
     this.uploading = true;
-    this.$axios.post('/stamps', form).then(() => {
+    stampStore.addStamp(form).then(() => {
       this.label = '';
       this.file = null;
       this.uploading = false;

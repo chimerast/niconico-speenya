@@ -4,27 +4,28 @@
       label.label Stamp
     .field-body
       .stamp-container
-        button.button(v-for="stamp in stamps" @click="postStamp(stamp.path)" :class="{ stamp: stamp.label === '' }")
+        .button.is-static(v-for="stamp in stamps" :class="{ stamp: stamp.label === '' }")
           img.image(:src="`/storage/stamps/${stamp.path}`")
           span(v-if="stamp.label !== ''") {{ stamp.label }}
+          button.delete(@click="deleteStamp(stamp.id)")
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'nuxt-property-decorator';
-import { Stamp } from '@/messages';
+import { stampStore } from '~/store';
 
 @Component
 export default class Comment extends Vue {
-  private stamps: Stamp[] = [];
-
-  private async mounted(): Promise<void> {
-    this.stamps = await this.$axios.$get(`/stamps`);
+  mounted() {
+    stampStore.fetchStamps();
   }
 
-  private async postStamp(path: string): Promise<void> {
-    await this.$axios.$post(`/messages/stamp`, {
-      path,
-    });
+  get stamps() {
+    return stampStore.stamps;
+  }
+
+  async deleteStamp(id: number) {
+    await stampStore.deleteStamp(id);
   }
 }
 </script>

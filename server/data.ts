@@ -52,6 +52,10 @@ class Data {
     await this.run('INSERT INTO stamps(label, path, contentType) VALUES($label, $path, $content_type);', label, path, contentType);
   }
 
+  public async deleteStamp(id: number): Promise<void> {
+    await this.run('DELETE FROM stamps WHERE id = $id', id);
+  }
+
   private serialize(callback: () => Promise<void>): Promise<void> {
     return new Promise<any>((resolve, reject) => {
       this.db.serialize(async () => {

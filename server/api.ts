@@ -53,5 +53,11 @@ export function api(io: socketio.Server): Router {
     res.end();
   });
 
+  api.delete('/stamps/:id', async (req, res) => {
+    const id = Number(req.params.id);
+    await data.deleteStamp(id);
+    res.end();
+  });
+
   return api;
 }

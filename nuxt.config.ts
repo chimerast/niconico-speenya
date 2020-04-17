@@ -25,11 +25,11 @@ const config: Configuration = {
   /*
    ** Global CSS
    */
-  css: ['./assets/scss/app.scss'],
+  css: ['~/assets/scss/app.scss'],
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [],
+  plugins: ['~/plugins/axios-accessor.ts'],
   /*
    ** Nuxt.js dev-modules
    */
@@ -49,6 +49,7 @@ const config: Configuration = {
     '@nuxtjs/axios',
     // Doc: https://github.com/nuxt-community/dotenv-module
     '@nuxtjs/dotenv',
+    '@nuxtjs/style-resources',
   ],
   /*
    ** Axios module configuration
@@ -72,6 +73,9 @@ const config: Configuration = {
   server: {
     host: process.env.HOST ?? 'localhost',
     port: process.env.PORT ?? '2525',
+  },
+  styleResources: {
+    scss: ['~/assets/scss/_variables.scss'],
   },
 };
 
