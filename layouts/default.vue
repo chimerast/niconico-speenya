@@ -20,7 +20,7 @@ export default class index extends Vue {
 
 <style lang="scss" scoped>
 .main {
-  min-height: 100vh;
+  min-height: stretch;
   display: flex;
   flex-direction: column;
 
