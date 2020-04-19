@@ -8,7 +8,7 @@ import { version } from '../package.json';
 replace.sync({
   files: './dist/extension/scripts/content_script.js',
   from: /SERVER_URL_SHOLD_BE_REPLACED/g,
-  to: process.env.SERVER_URL ?? 'http://localhost:2525',
+  to: process.env.SERVER_URL ?? 'http://localhost:3000',
 });
 
 replace.sync({

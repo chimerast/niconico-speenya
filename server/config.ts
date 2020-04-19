@@ -1,7 +1,4 @@
 import fs from 'fs';
-import { config as dotenvConfig } from 'dotenv';
-
-dotenvConfig();
 
 const dataDir = process.env.DATA_DIR ?? './data';
 

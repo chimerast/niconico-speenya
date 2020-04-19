@@ -175,7 +175,7 @@ class SpeenyaClient {
   }
 }
 
-const speenya = new SpeenyaClient(process.env.SERVER_URL || 'http://localhost:2525');
+const speenya = new SpeenyaClient(process.env.SERVER_URL!);
 
 chrome.storage.sync.get({ enabled: true }, (items) => {
   if (items.enabled) {

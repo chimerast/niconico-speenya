@@ -1,4 +1,5 @@
 import { Configuration } from '@nuxt/types';
+import { io } from './server/io';
 
 const config: Configuration = {
   mode: 'spa',
@@ -47,8 +48,7 @@ const config: Configuration = {
     'nuxt-buefy',
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/dotenv-module
-    '@nuxtjs/dotenv',
+    // Doc: https://github.com/nuxt-community/style-resources-module
     '@nuxtjs/style-resources',
   ],
   /*
@@ -70,10 +70,12 @@ const config: Configuration = {
   generate: {
     dir: 'dist/public',
   },
-  server: {
-    host: process.env.HOST ?? 'localhost',
-    port: process.env.PORT ?? '2525',
+  hooks: {
+    listen: (server) => {
+      io.attach(server);
+    },
   },
+  serverMiddleware: [{ path: '/', handler: '~/server/index.ts' }],
   styleResources: {
     scss: ['~/assets/scss/_variables.scss'],
   },

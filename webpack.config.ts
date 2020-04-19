@@ -2,9 +2,6 @@ import path from 'path';
 import { exec } from 'child_process';
 import { Configuration, DefinePlugin } from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
-import { config as dotenvConfig } from 'dotenv';
-
-dotenvConfig();
 
 const config: Configuration = {
   mode: 'production',
@@ -30,7 +27,7 @@ const config: Configuration = {
   },
   plugins: [
     new DefinePlugin({
-      'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL),
+      'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL || 'http://localhost:3000'),
     }),
     new CopyPlugin([
       {

@@ -15,19 +15,18 @@
     "allowJs": true,
     "sourceMap": true,
     "strict": true,
-    "noEmit": true,
+    "noEmit": false,
     "baseUrl": ".",
     "paths": {
       "~/*": [
-        "../*"
+        "./*"
       ],
       "@/*": [
-        "../*"
+        "./*"
       ]
     },
     "types": [
-      "@types/node",
-      "@nuxt/types"
+      "@types/node"
     ]
   },
   "exclude": [
