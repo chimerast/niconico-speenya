@@ -21,4 +21,4 @@ ENV SERVER_URL http://localhost:8080
 EXPOSE 8080
 
 ENTRYPOINT ["tini", "--"]
-CMD ["./node_modules/.bin/ts-node", "/app/server/index.ts"]
+CMD ["npx", "nuxt-ts", "start"]

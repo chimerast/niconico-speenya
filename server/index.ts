@@ -14,6 +14,6 @@ data.createTable();
 
 app.use('/api', api(io));
 app.use('/storage', storage());
-app.use('/extension', extension());
+app.use('/extension.zip', extension());
 
 module.exports = app;
