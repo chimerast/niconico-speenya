@@ -1,7 +1,7 @@
 /* global chrome */
 import io from 'socket.io-client';
 
-import { CommentJson, StampJson } from '@/messages';
+import { CommentJson, StampJson, Stamp } from '@/messages';
 
 const APP_ID = chrome.runtime.id;
 const APP_VERSION = chrome.runtime.getManifest().version;
@@ -21,12 +21,23 @@ class SpeenyaClient {
 
   public connect(): void {
     this.socket.connect();
+    this.prefetchStamps();
     console.log(`niconico speenya v${APP_VERSION}: connect to ${this.host}`);
   }
 
   public disconnect(): void {
     this.socket.disconnect();
     console.log(`niconico speenya v${APP_VERSION}: disconnect from ${this.host}`);
+  }
+
+  private prefetchStamps(): void {
+    fetch(`${this.host}/api/stamps`)
+      .then((res) => res.json())
+      .then((json) => {
+        (json as Stamp[]).forEach((stamp) => {
+          new Image().src = `${this.host}/storage/stamps/${stamp.path}`;
+        });
+      });
   }
 
   private rootElement(): Element {

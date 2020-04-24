@@ -10,10 +10,13 @@ export function storage(): Router {
     try {
       const stamp = await data.getStampByPath(req.param('path'));
 
-      res.setHeader('Content-Type', stamp.contentType);
-      res.setHeader('Cache-Control', 'public, max-age=3600');
-
-      res.sendFile(path.resolve(__dirname, '..', `${config.stamps}/${stamp.path}`));
+      res.sendFile(path.resolve(__dirname, '..', `${config.stamps}/${stamp.path}`), {
+        maxAge: '30d',
+        immutable: true,
+        headers: {
+          'content-type': stamp.contentType,
+        },
+      });
     } catch (err) {
       res.status(500).end();
     }
