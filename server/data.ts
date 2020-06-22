@@ -26,6 +26,11 @@ class Data {
           contentType TEXT NOT NULL
         )`);
 
+      const stamps = await this.all('PRAGMA table_info(stamps);');
+      if (!stamps.some((stamp) => stamp.name === 'order')) {
+        await this.run(`ALTER TABLE stamps ADD "order" INTEGER NOT NULL DEFAULT 0`);
+      }
+
       await this.run(`
         CREATE TABLE IF NOT EXISTS comments (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -37,7 +42,7 @@ class Data {
   }
 
   public async getAllStamps(): Promise<Stamp[]> {
-    return await this.all('SELECT * FROM stamps');
+    return await this.all('SELECT * FROM stamps ORDER BY "order", id');
   }
 
   public async getStamp(id: number): Promise<Stamp> {
@@ -54,6 +59,12 @@ class Data {
 
   public async deleteStamp(id: number): Promise<void> {
     await this.run('DELETE FROM stamps WHERE id = $id', id);
+  }
+
+  public async updateStampOrder(orders: { id: number; order: number }[]) {
+    for (const order of orders) {
+      await this.run('UPDATE stamps SET "order" = $order WHERE id = $id', order.order, order.id);
+    }
   }
 
   private serialize(callback: () => Promise<void>): Promise<void> {

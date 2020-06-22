@@ -29,20 +29,22 @@ const config: Configuration = {
     new DefinePlugin({
       'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL || 'http://localhost:3000'),
     }),
-    new CopyPlugin([
-      {
-        from: path.resolve(__dirname, './extension/manifest.json'),
-        to: path.resolve(__dirname, './dist/extension'),
-      },
-      {
-        from: path.resolve(__dirname, './extension/images'),
-        to: path.resolve(__dirname, './dist/extension/images'),
-      },
-      {
-        from: path.resolve(__dirname, './extension/styles'),
-        to: path.resolve(__dirname, './dist/extension/styles'),
-      },
-    ]),
+    new CopyPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, './extension/manifest.json'),
+          to: path.resolve(__dirname, './dist/extension'),
+        },
+        {
+          from: path.resolve(__dirname, './extension/images'),
+          to: path.resolve(__dirname, './dist/extension/images'),
+        },
+        {
+          from: path.resolve(__dirname, './extension/styles'),
+          to: path.resolve(__dirname, './dist/extension/styles'),
+        },
+      ],
+    }),
     {
       apply: (compiler) => {
         compiler.hooks.afterEmit.tap('AfterEmitPlugin', (_compilation) => {

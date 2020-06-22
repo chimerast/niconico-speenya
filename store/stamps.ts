@@ -32,4 +32,19 @@ export default class Stamps extends VuexModule {
     await $axios.$delete(`/stamps/${id}`);
     await this.context.dispatch('fetchStamps');
   }
+
+  @Action
+  async updateOrder(stamps: Stamp[]) {
+    await $axios.post(
+      '/stamps/order',
+      stamps.map((stamp, index) => {
+        return {
+          id: stamp.id,
+          order: index,
+        };
+      })
+    );
+
+    this.context.commit('setStamps', stamps);
+  }
 }

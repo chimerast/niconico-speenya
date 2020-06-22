@@ -59,5 +59,10 @@ export function api(io: socketio.Server): Router {
     res.end();
   });
 
+  api.post('/stamps/order', async (req, res) => {
+    await data.updateStampOrder(req.body);
+    res.end();
+  });
+
   return api;
 }
