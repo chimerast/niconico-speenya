@@ -1,7 +1,7 @@
-import socketio, { Socket } from 'socket.io';
+import { Socket, Server } from 'socket.io';
 import consola from 'consola';
 
-export const io = socketio();
+export const io = new Server();
 
 function logSocketEvent(socket: Socket, event: string) {
   consola.log(

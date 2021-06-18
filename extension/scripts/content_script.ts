@@ -1,5 +1,5 @@
 /* global chrome */
-import io from 'socket.io-client';
+import io, { Socket } from 'socket.io-client';
 
 import { CommentJson, StampJson, Stamp } from '@/messages';
 
@@ -9,7 +9,7 @@ const APP_VERSION = chrome.runtime.getManifest().version;
 const NOT_FOUND_IMAGE_URL = `chrome-extension://${APP_ID}/images/404.png`;
 
 class SpeenyaClient {
-  private socket: SocketIOClient.Socket;
+  private socket: Socket;
   private video: HTMLVideoElement | undefined;
 
   constructor(private readonly host: string) {

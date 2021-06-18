@@ -45,7 +45,7 @@ export function api(io: socketio.Server): Router {
     const file = res.req?.file;
     if (file === undefined) return res.status(409).end();
 
-    const label = req.param('label');
+    const label = req.body.label;
     const path = file.filename;
     const contentType = file.mimetype;
 
