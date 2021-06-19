@@ -15,7 +15,7 @@ nuxtconfig.dev = !config.production;
 const app = express();
 
 app.use(cors({ origin: '*', methods: ['GET', 'POST'] }));
-app.use(session({ secret: 'cats', cookie: { secure: config.secure } }));
+app.use(session({ secret: config.sessionSecret, resave: false, saveUninitialized: true, proxy: true, cookie: { secure: 'auto' } }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(auth(app));
