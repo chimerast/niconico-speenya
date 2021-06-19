@@ -1,11 +1,11 @@
-FROM node:12-alpine
+FROM node:16-alpine
 
 RUN apk add --no-cache tini bash imagemagick
 
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
 ENV SERVER_URL SERVER_URL_SHOLD_BE_REPLACED
 
@@ -21,4 +21,4 @@ ENV SERVER_URL http://localhost:8080
 EXPOSE 8080
 
 ENTRYPOINT ["tini", "--"]
-CMD ["npx", "nuxt-ts", "start"]
+CMD ["npx", "nuxt", "start"]

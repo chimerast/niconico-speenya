@@ -28,7 +28,7 @@ export default class CommentParameter extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.parameter /deep/ {
+.parameter ::v-deep {
   .field.has-addons {
     .control {
       flex: 1;

@@ -1,6 +1,6 @@
 import { Database } from 'sqlite3';
-import { config } from './config';
 import { Stamp } from '@/messages';
+import { config } from './config';
 
 class Data {
   private readonly db: Database;
@@ -68,7 +68,7 @@ class Data {
   }
 
   private serialize(callback: () => Promise<void>): Promise<void> {
-    return new Promise<any>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       this.db.serialize(async () => {
         try {
           await callback();

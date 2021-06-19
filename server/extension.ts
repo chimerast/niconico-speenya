@@ -4,11 +4,12 @@ import express, { Router } from 'express';
 import archiver from 'archiver';
 import replace from 'replace-in-file';
 import { version } from '../package.json';
+import { config } from './config';
 
 replace.sync({
   files: './dist/extension/scripts/content_script.js',
   from: /SERVER_URL_SHOLD_BE_REPLACED/g,
-  to: process.env.SERVER_URL ?? 'http://localhost:3000',
+  to: config.serverUrl,
 });
 
 replace.sync({

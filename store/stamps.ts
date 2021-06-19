@@ -1,6 +1,6 @@
 import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators';
-import { $axios } from '~/utils/api';
 import { Stamp } from '@/messages';
+import { $axios } from '~/utils/api';
 
 @Module({
   name: 'stamps',

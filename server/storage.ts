@@ -8,7 +8,7 @@ export function storage(): Router {
 
   storage.get('/stamps/:path', async (req, res) => {
     try {
-      const stamp = await data.getStampByPath(req.param('path'));
+      const stamp = await data.getStampByPath(req.params.path);
 
       res.sendFile(path.resolve(__dirname, '..', `${config.stamps}/${stamp.path}`), {
         maxAge: '30d',

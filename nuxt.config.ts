@@ -1,11 +1,11 @@
-import { Configuration } from '@nuxt/types';
+import { NuxtConfig } from '@nuxt/types';
 import { io } from './server/io';
 
-const config: Configuration = {
-  mode: 'spa',
-  /*
-   ** Headers of the page
-   */
+const config: NuxtConfig = {
+  // Disable server-side rendering: https://go.nuxtjs.dev/ssr-mode
+  ssr: false,
+
+  // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: process.env.npm_package_name || '',
     meta: [
@@ -19,63 +19,52 @@ const config: Configuration = {
     ],
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
-  /*
-   ** Customize the progress-bar color
-   */
-  loading: { color: '#fff' },
-  /*
-   ** Global CSS
-   */
+
+  // Global CSS: https://go.nuxtjs.dev/config-css
   css: ['~/assets/scss/app.scss'],
-  /*
-   ** Plugins to load before mounting the App
-   */
+
+  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: ['~/plugins/axios-accessor.ts'],
-  /*
-   ** Nuxt.js dev-modules
-   */
+
+  // Auto import components: https://go.nuxtjs.dev/config-components
+  components: true,
+
+  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
     // Doc: https://typescript.nuxtjs.org/
     '@nuxt/typescript-build',
     // Doc: https://github.com/nuxt-community/eslint-module
     '@nuxtjs/eslint-module',
   ],
-  /*
-   ** Nuxt.js modules
-   */
+
+  // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
-    // Doc: https://buefy.github.io/#/documentation
+    // https://go.nuxtjs.dev/buefy
     'nuxt-buefy',
-    // Doc: https://axios.nuxtjs.org/usage
+    // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    // Doc: https://github.com/nuxt-community/style-resources-module
-    '@nuxtjs/style-resources',
   ],
-  /*
-   ** Axios module configuration
-   ** See https://axios.nuxtjs.org/options
-   */
+
+  // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     baseURL: '/api',
   },
-  /*
-   ** Build configuration
-   */
-  build: {
-    /*
-     ** You can extend webpack config here
-     */
-    extend(_config, _ctx) {},
-  },
+
+  // Build Configuration: https://go.nuxtjs.dev/config-build
+  build: {},
+
   generate: {
     dir: 'dist/public',
   },
+
   hooks: {
     listen: (server) => {
       io.attach(server);
     },
   },
+
   serverMiddleware: [{ path: '/', handler: '~/server/index.ts' }],
+
   styleResources: {
     scss: ['~/assets/scss/_variables.scss'],
   },
