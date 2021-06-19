@@ -7,6 +7,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
+ENV SERVER_URL SERVER_URL_SHOLD_BE_REPLACED
+
 COPY . .
 RUN npm run build
 

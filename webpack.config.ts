@@ -1,6 +1,6 @@
 import path from 'path';
 import { exec } from 'child_process';
-import { Configuration } from 'webpack';
+import { Configuration, DefinePlugin } from 'webpack';
 import CopyPlugin from 'copy-webpack-plugin';
 
 const config: Configuration = {
@@ -26,6 +26,9 @@ const config: Configuration = {
     extensions: ['.ts', '.tsx', '.js'],
   },
   plugins: [
+    new DefinePlugin({
+      'process.env.SERVER_URL': JSON.stringify(process.env.SERVER_URL || 'http://localhost:3000'),
+    }),
     new CopyPlugin({
       patterns: [
         {
