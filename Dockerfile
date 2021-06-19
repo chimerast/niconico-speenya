@@ -5,7 +5,7 @@ RUN apk add --no-cache tini bash imagemagick
 WORKDIR /app
 
 COPY package.json package-lock.json ./
-RUN npm install
+RUN npm ci
 
 ENV SERVER_URL SERVER_URL_SHOLD_BE_REPLACED
 
