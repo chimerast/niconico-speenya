@@ -15,9 +15,6 @@ export function api(io: socketio.Server): Router {
 
   const api = express.Router();
 
-  api.use(express.json());
-  api.use(express.urlencoded({ extended: true }));
-
   api.post('/messages/comment', (req, res) => {
     const msg = Object.assign({}, req.body) as CommentJson;
     io.emit('comment', msg);

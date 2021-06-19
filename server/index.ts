@@ -1,14 +1,24 @@
 import express from 'express';
-import config from '../nuxt.config';
+import cors from 'cors';
+import session from 'express-session';
+import nuxtconfig from '../nuxt.config';
+import { config } from './config';
 import { io } from './io';
+import { auth } from './auth';
 import { api } from './api';
 import { storage } from './storage';
 import { extension } from './extension';
 import { data } from './data';
 
-config.dev = process.env.NODE_ENV !== 'production';
+nuxtconfig.dev = !config.production;
 
 const app = express();
+
+app.use(cors({ origin: '*', methods: ['GET', 'POST'] }));
+app.use(session({ secret: 'cats', cookie: { secure: config.secure } }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(auth(app));
 
 data.createTable();
 

@@ -7,8 +7,6 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
-ENV SERVER_URL SERVER_URL_SHOLD_BE_REPLACED
-
 COPY . .
 RUN npm run build
 
@@ -21,4 +19,4 @@ ENV SERVER_URL http://localhost:8080
 EXPOSE 8080
 
 ENTRYPOINT ["tini", "--"]
-CMD ["npx", "nuxt-ts", "start"]
+CMD ["npx", "nuxt", "start"]

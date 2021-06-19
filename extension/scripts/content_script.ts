@@ -186,7 +186,7 @@ class SpeenyaClient {
   }
 }
 
-const speenya = new SpeenyaClient(process.env.SERVER_URL!);
+const speenya = new SpeenyaClient('SERVER_URL_SHOLD_BE_REPLACED');
 
 chrome.storage.sync.get({ enabled: true }, (items) => {
   if (items.enabled) {

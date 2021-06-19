@@ -1,7 +1,7 @@
 import { Socket, Server } from 'socket.io';
 import consola from 'consola';
 
-export const io = new Server();
+export const io = new Server({ cors: { origin: '*', methods: ['GET', 'POST'] } });
 
 function logSocketEvent(socket: Socket, event: string) {
   consola.log(
