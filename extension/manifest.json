@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
-  "name": "NicoNico SPEENYA",
-  "version": "0.0.3",
-  "description": "The niconico method for Google Chrome",
+  "name": "niconico-speenya",
+  "version": "PACKAGE_VERSION_SHOLD_BE_REPLACED",
+  "description": "The niconico method presentation for Google Chrome",
 
   "icons": {
     "16": "icons/icon16.png",
@@ -12,26 +12,29 @@
 
   "browser_action":  {
     "default_icon": {
-      "19":"icons/icon19.png",
-      "38":"icons/icon38.png"
+      "16": "icons/icon16.png",
+      "24": "icons/icon24.png",
+      "32": "icons/icon32.png"
     },
     "default_title": "NicoNico SPEENYA"
   },
-
   "background": {
     "scripts": ["scripts/background.js"]
   },
+
   "content_scripts": [
     {
-      "matches": ["<all_urls>"],
-      "js": ["scripts/socket.io-1.7.3.js", "scripts/content-script.js"]
+      "matches": ["*://*/*"],
+      "css": ["styles/content_style.css"],
+      "js": ["scripts/content_script.js", "scripts/vendor.js"]
     }
   ],
   "web_accessible_resources": [
     "images/*"
   ],
   "permissions": [
-    "<all_urls>",
+    "*://*/*",
+    "contextMenus",
     "tabs",
     "storage"
   ]
