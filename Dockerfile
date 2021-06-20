@@ -1,6 +1,10 @@
-FROM node:16-alpine
+FROM node:16-slim
 
-RUN apk add --no-cache tini bash imagemagick
+RUN apt-get update && apt-get install -y \
+  tini \
+  bash \
+  imagemagick \
+  && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
