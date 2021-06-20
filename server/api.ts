@@ -5,6 +5,7 @@ import socketio from 'socket.io';
 import { StampJson, CommentJson } from '../messages';
 import { data } from './data';
 import { config } from './config';
+import { setting } from './setting';
 
 export function api(io: socketio.Server): Router {
   const storage = multer.diskStorage({
@@ -24,7 +25,9 @@ export function api(io: socketio.Server): Router {
   api.post('/messages/stamp', (req, res) => {
     let stamp: StampJson;
     if (req.body?.path !== undefined) {
-      stamp = Object.assign({ url: `/storage/stamps/${req.body.path}` }, req.body) as StampJson;
+      const path = `/storage/stamps/${req.body.path}`;
+      const sign = setting.signPath(path);
+      stamp = Object.assign({ url: `${path}?s=${sign}` }, req.body) as StampJson;
     } else {
       stamp = Object.assign({}, req.body) as StampJson;
     }
@@ -32,8 +35,18 @@ export function api(io: socketio.Server): Router {
     res.end();
   });
 
-  api.get('/stamps', async (_req, res) => {
-    res.json(await data.getAllStamps());
+  api.get('/stamps', (_req, res) => {
+    res.json(data.getAllStamps());
+  });
+
+  api.get('/stamps/urls', (_req, res) => {
+    res.json(
+      data.getAllStamps().map((stamp) => {
+        const path = `/storage/stamps/${stamp.path}`;
+        const sign = setting.signPath(path);
+        return `${config.serverUrl}${path}?s=${sign}`;
+      })
+    );
   });
 
   api.post('/stamps', async (req, res) => {
@@ -46,18 +59,18 @@ export function api(io: socketio.Server): Router {
     const path = file.filename;
     const contentType = file.mimetype;
 
-    await data.addStamp(label, path, contentType);
+    data.addStamp(label, path, contentType);
     res.end();
   });
 
-  api.delete('/stamps/:id', async (req, res) => {
+  api.delete('/stamps/:id', (req, res) => {
     const id = Number(req.params.id);
-    await data.deleteStamp(id);
+    data.deleteStamp(id);
     res.end();
   });
 
-  api.post('/stamps/order', async (req, res) => {
-    await data.updateStampOrder(req.body);
+  api.post('/stamps/order', (req, res) => {
+    data.updateStampOrder(req.body);
     res.end();
   });
 

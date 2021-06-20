@@ -6,9 +6,9 @@ import { config } from './config';
 export function storage(): Router {
   const storage = express.Router();
 
-  storage.get('/stamps/:path', async (req, res) => {
+  storage.get('/stamps/:path', (req, res) => {
     try {
-      const stamp = await data.getStampByPath(req.params.path);
+      const stamp = data.getStampByPath(req.params.path);
 
       res.sendFile(path.resolve(__dirname, '..', `${config.stamps}/${stamp.path}`), {
         maxAge: '30d',

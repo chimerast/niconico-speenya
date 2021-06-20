@@ -5,14 +5,15 @@ import archiver from 'archiver';
 import replace from 'replace-in-file';
 import { version } from '../package.json';
 import { config } from './config';
+import { setting } from './setting';
 
-replace.sync({
+replace.replaceInFile({
   files: './dist/extension/scripts/content_script.js',
-  from: /SERVER_URL_SHOLD_BE_REPLACED/g,
-  to: config.serverUrl,
+  from: [/SERVER_URL_SHOLD_BE_REPLACED/g, /EXTENSION_SECRET_SHOLD_BE_REPLACED/g],
+  to: [config.serverUrl, setting.extensionSecret],
 });
 
-replace.sync({
+replace.replaceInFile({
   files: './dist/extension/manifest.json',
   from: /PACKAGE_VERSION_SHOLD_BE_REPLACED/g,
   to: version ?? '0.0.0',

@@ -1,4 +1,4 @@
-import { Database } from 'sqlite3';
+import sqlite3, { Database } from 'better-sqlite3';
 import { Stamp } from '@/messages';
 import { config } from './config';
 
@@ -6,96 +6,67 @@ class Data {
   private readonly db: Database;
 
   constructor(path: string = config.database) {
-    this.db = new Database(path);
-  }
-
-  public async createTable(): Promise<void> {
-    await this.serialize(async () => {
-      await this.run(`
+    this.db = sqlite3(path);
+    this.db.exec(`
+        CREATE TABLE IF NOT EXISTS settings (
+          key TEXT PRIMARY KEY,
+          value TEXT NOT NULL
+        );
         CREATE TABLE IF NOT EXISTS tenants (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           label TEXT NOT NULL
-        )`);
-
-      await this.run(`
+        );
         CREATE TABLE IF NOT EXISTS stamps (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           createdAt DATETIME NOT NULL DEFAULT (datetime('now', 'utc')),
           label TEXT NOT NULL,
           path TEXT NOT NULL,
-          contentType TEXT NOT NULL
-        )`);
-
-      const stamps = await this.all('PRAGMA table_info(stamps);');
-      if (!stamps.some((stamp) => stamp.name === 'order')) {
-        await this.run(`ALTER TABLE stamps ADD "order" INTEGER NOT NULL DEFAULT 0`);
-      }
-
-      await this.run(`
+          contentType TEXT NOT NULL,
+          "order" INTEGER NOT NULL DEFAULT 0
+        );
         CREATE TABLE IF NOT EXISTS comments (
           id INTEGER PRIMARY KEY AUTOINCREMENT,
           createdAt DATETIME NOT NULL DEFAULT (datetime('now', 'utc')),
           tenant_id INTEGER NOT NULL,
           comment TEXT NOT NULL
-        )`);
-    });
+        );
+        `);
   }
 
-  public async getAllStamps(): Promise<Stamp[]> {
-    return await this.all('SELECT * FROM stamps ORDER BY "order", id');
+  public getSetting(key: string, defaultValue: () => string): string {
+    const value: string | undefined = this.db.prepare('SELECT value FROM settings WHERE key = ?').bind(key).pluck().get();
+    if (value !== undefined) return value;
+
+    const newValue = defaultValue();
+    this.db.prepare('REPLACE INTO settings(key, value) VALUES(?, ?);').run(key, newValue);
+    return newValue;
   }
 
-  public async getStamp(id: number): Promise<Stamp> {
-    return await this.get('SELECT * FROM stamps WHERE id = $id', id);
+  public getAllStamps(): Stamp[] {
+    return this.db.prepare('SELECT * FROM stamps ORDER BY "order", id').all();
   }
 
-  public async getStampByPath(path: string): Promise<Stamp> {
-    return await this.get('SELECT * FROM stamps WHERE path = $path', path);
+  public getStamp(id: number): Stamp {
+    return this.db.prepare('SELECT * FROM stamps WHERE id = ?').bind(id).get();
   }
 
-  public async addStamp(label: string, path: string, contentType: string): Promise<void> {
-    await this.run('INSERT INTO stamps(label, path, contentType) VALUES($label, $path, $content_type);', label, path, contentType);
+  public getStampByPath(path: string): Stamp {
+    return this.db.prepare('SELECT * FROM stamps WHERE path = ?').bind(path).get();
   }
 
-  public async deleteStamp(id: number): Promise<void> {
-    await this.run('DELETE FROM stamps WHERE id = $id', id);
+  public addStamp(label: string, path: string, contentType: string): void {
+    this.db.prepare('INSERT INTO stamps(label, path, contentType) VALUES(?, ?, ?)').run(label, path, contentType);
   }
 
-  public async updateStampOrder(orders: { id: number; order: number }[]) {
+  public deleteStamp(id: number): void {
+    this.db.prepare('DELETE FROM stamps WHERE id = ?').run(id);
+  }
+
+  public updateStampOrder(orders: { id: number; order: number }[]) {
+    const stmt = this.db.prepare('UPDATE stamps SET "order" = @order WHERE id = @id');
     for (const order of orders) {
-      await this.run('UPDATE stamps SET "order" = $order WHERE id = $id', order.order, order.id);
+      stmt.run(order);
     }
-  }
-
-  private serialize(callback: () => Promise<void>): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.db.serialize(async () => {
-        try {
-          await callback();
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      });
-    });
-  }
-
-  private get(sql: string, ...params: any[]): Promise<any> {
-    return new Promise<any>((resolve, reject) => {
-      this.db.get(sql, params, (err, row) => (err ? reject(err) : resolve(row)));
-    });
-  }
-
-  private all(sql: string, ...params: any[]): Promise<any[]> {
-    return new Promise<any[]>((resolve, reject) => {
-      this.db.all(sql, params, (err, rows) => (err ? reject(err) : resolve(rows)));
-    });
-  }
-
-  private run(sql: string, ...params: any[]): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.db.run(sql, params, (err) => (err ? reject(err) : resolve()));
-    });
   }
 }
 

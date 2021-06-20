@@ -13,6 +13,11 @@ export interface StampJson {
   easing?: string;
 }
 
+export interface Setting {
+  key: string;
+  value: string;
+}
+
 export interface Stamp {
   id: number;
   label: string;

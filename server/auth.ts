@@ -2,6 +2,7 @@ import { Express, NextFunction, Request, RequestHandler, Response } from 'expres
 import passport from 'passport';
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20';
 import { config } from './config';
+import { setting } from './setting';
 
 export function auth(app: Express): RequestHandler {
   const clientID = process.env.GOOGLE_CLIENT_ID;
@@ -38,7 +39,11 @@ export function auth(app: Express): RequestHandler {
   });
 
   function shouldBeAuthenticated(req: Request): boolean {
-    return !req.path.startsWith('/auth/');
+    const isAuthUrl = req.path.startsWith('/auth/');
+    const isExtension = req.path.startsWith('/storage/') && req.query.s === setting.signPath(req.path);
+    const isPrefetchUrl = req.path === '/api/stamps/urls';
+
+    return !(isAuthUrl || isExtension || isPrefetchUrl);
   }
 
   return (req: Request, res: Response, next: NextFunction) => {

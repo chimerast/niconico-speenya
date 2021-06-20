@@ -1,7 +1,7 @@
 /* global chrome */
 import io, { Socket } from 'socket.io-client';
 
-import { CommentJson, StampJson, Stamp } from '@/messages';
+import { CommentJson, StampJson } from '@/messages';
 
 const APP_ID = chrome.runtime.id;
 const APP_VERSION = chrome.runtime.getManifest().version;
@@ -31,11 +31,11 @@ class SpeenyaClient {
   }
 
   private prefetchStamps(): void {
-    fetch(`${this.host}/api/stamps`)
+    fetch(`${this.host}/api/stamps/urls`)
       .then((res) => res.json())
-      .then((json) => {
-        (json as Stamp[]).forEach((stamp) => {
-          new Image().src = `${this.host}/storage/stamps/${stamp.path}`;
+      .then((urls) => {
+        (urls as string[]).forEach((url) => {
+          new Image().src = url;
         });
       });
   }
