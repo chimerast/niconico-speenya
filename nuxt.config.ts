@@ -53,6 +53,8 @@ const config: NuxtConfig = {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {},
 
+  loading: false,
+
   generate: {
     dir: 'dist/public',
   },
