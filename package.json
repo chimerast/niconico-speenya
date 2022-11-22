@@ -34,7 +34,7 @@
     "nuxt-buefy": "^0.4.7",
     "passport": "^0.4.1",
     "replace-in-file": "^6.2.0",
-    "socket.io": "^4.1.2",
+    "socket.io": "^4.5.3",
     "socket.io-client": "^4.1.2",
     "vuedraggable": "^2.24.3",
     "vuex": "^3.6.2"
