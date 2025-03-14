@@ -4,6 +4,8 @@ RUN apt-get update && apt-get install -y \
   tini \
   bash \
   imagemagick \
+  build-essential \
+  python3 \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
